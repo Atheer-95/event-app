@@ -35,7 +35,7 @@ class EventAPI {
     
     }
     
-    class func requestEvents(completion: @escaping ([EventResponse]?, Error?) -> Void){
+    class func requestEvents(completion: @escaping (SeatGeekResponse?, Error?) -> Void){
         var request = URLRequest(url: Endpoint.events.url)
         request.httpMethod = "GET"
         let clientID = "Mzk2NjA5MjJ8MTcwNjUyMDA2Mi44MjQ4MDAz"
@@ -44,46 +44,39 @@ class EventAPI {
         var components = URLComponents(url: Endpoint.events.url, resolvingAgainstBaseURL: true)!
         components.queryItems = queryItems
         request.url = components.url
-        
+
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error fetching data: \(error)")
                 return
             }
-            
+
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 print("Error with the response, unexpected status code: \(String(describing: response))")
                 return
             }
-            
-            guard let data = data else {
-                completion(nil , error)
-                return
+
+            if let data = data {
+                print(data)
+                do {
+//                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//                    {print(json)}
+                    // Use JSONDecoder to parse the data
+                    let decoder = JSONDecoder()
+                    // Assuming you have an EventResponse array in your JSON
+                    let seatGeekResponseObject = try decoder.decode(SeatGeekResponse.self, from: data)
+                    // Handle the parsed data
+//                    print(seatGeekResponseObject.events)
+                    for event in seatGeekResponseObject.events {
+                        print(event.title)
+                    }
+                                 
+                } catch {
+                    print("Error parsing JSON data: \(error)")
+                }
             }
-            
-            
-            print(data)
-            let decoder = JSONDecoder()
-            do {
-                
-                // Parse the JSON data
-                
-//                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-//                {
-//                    print(json)
-//
-//                }
-                // it is came as dictionary !!!!!!!!!!!!!!!!!!!!!!!!!!
-                let eventResponse = try decoder.decode([EventResponse].self, from: data )
-                print(eventResponse)
-                
-                // Handle the parsed data
-                
-            } catch let error {
-                print("Error parsing JSON data: \(error)")
-            }
-            
         }
+
         task.resume()
     }
    

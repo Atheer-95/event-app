@@ -7,7 +7,29 @@
 
 import Foundation
 
-struct EventResponse: Decodable {
+struct SeatGeekResponse: Decodable {
+    let events: [Event]
+    let meta: MetaData
+}
+
+struct MetaData: Decodable {
+    let geolocation: String?
+    let page: Int
+    let perPage: Int
+    let took: Int
+    let total: Int
+
+    private enum CodingKeys: String, CodingKey {
+        case geolocation
+        case page
+        case perPage = "per_page"
+        case took
+        case total
+    }
+}
+
+// ... Your existing Event, Stats, Performer, etc. structs ...
+struct Event: Decodable {
     let stats: Stats
     let title: String
     let url: String
@@ -30,10 +52,10 @@ struct EventResponse: Decodable {
 }
 
 struct Stats: Decodable {
-    let listingCount: Int
-    let averagePrice: Int
-    let lowestPrice: Int
-    let highestPrice: Int
+    let listingCount: Int?
+    let averagePrice: Int?
+    let lowestPrice: Int?
+    let highestPrice: Int?
 
     enum CodingKeys: String, CodingKey {
         case listingCount = "listing_count"
@@ -49,9 +71,9 @@ struct Performer: Decodable {
     let url: String
     let image: String?
     let images: PerformerImages?
-    let primary: Bool
+    let primary: Bool?
     let id: Int
-    let score: Int
+    let score: Double
     let type: String
     let slug: String
 
@@ -62,10 +84,10 @@ struct Performer: Decodable {
 }
 
 struct PerformerImages: Decodable {
-    let large: String
-    let huge: String
-    let small: String
-    let medium: String
+    let large: String?
+    let huge: String?
+    let small: String?
+    let medium: String?
 }
 
 struct Venue: Decodable {
@@ -148,10 +170,10 @@ struct Taxonomy: Decodable {
 //    var shortName: String
 //    var url: String
 //    var image: String?
-//    var images: [PerformerImage]?
-//    var primary: Bool
+//    var images: PerformerImages?
+//    var primary: Bool?
 //    var id: Int
-//    var score: Int
+//    var score: Double
 //    var type: String
 //    var slug: String
 //
@@ -161,11 +183,15 @@ struct Taxonomy: Decodable {
 //    }
 //}
 //
-//struct PerformerImage: Decodable {
-//    var large: String
-//    var huge: String
-//    var small: String
-//    var medium: String
+//struct PerformerImages: Decodable {
+//    var large: String?
+//    var huge: String?
+//    var small: String?
+//    var medium: String?
+//
+//    private enum CodingKeys: String, CodingKey {
+//        case large, huge, small, medium
+//    }
 //}
 //
 //
@@ -196,7 +222,7 @@ struct Taxonomy: Decodable {
 //}
 //
 //struct Taxonomy: Decodable {
-//    var parentId: String?
+//    var parentId: Int?
 //    var id: Int
 //    var name: String
 //
@@ -205,7 +231,7 @@ struct Taxonomy: Decodable {
 //        case parentId = "parent_id"
 //    }
 //}
-//
+
 
 /*
  Example Response Document
