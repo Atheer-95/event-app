@@ -35,7 +35,6 @@ class EventTableViewController: UIViewController {
     }
     
     func setupEventData(){
-        controller?.handleRequestEvent()
         self.events = controller?.events
     }
 }

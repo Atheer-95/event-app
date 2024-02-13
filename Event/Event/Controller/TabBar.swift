@@ -33,10 +33,10 @@ class TabBar: UITabBarController {
 
     func setupVCs(){
         viewControllers = [
-          createNavController(for: EventViewController(),
+            createNavController(for: Composer.eventViewController(),
                                  title: NSLocalizedString("Events", comment: ""),
                                  image: UIImage(systemName: "scale.3d")!),
-            createNavController(for: SettingsViewController(),
+            createNavController(for: Composer.settingsViewController(),
                                    title: NSLocalizedString("Settings", comment: ""),
                                    image: UIImage(systemName: "gear")!)
         ]

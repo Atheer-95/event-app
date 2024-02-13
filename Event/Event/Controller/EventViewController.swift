@@ -22,14 +22,15 @@ class EventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        controller?.handleRequestEvent(tableView: tableView)
 //        view.backgroundColor = .systemBackground
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCellIdentifier)
         tableView.register(EmptyEventTableViewCell.self, forCellReuseIdentifier: EmptyEventTableViewCellIdentifier)
 //        controller?.handleRequestEvent()
         setupTableView()
+        tableView.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
-        controller?.handleRequestEvent()
         tableView.reloadData()
     }
 
@@ -67,13 +68,5 @@ extension EventViewController: UITableViewDelegate, UITableViewDataSource {
         let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyEventTableViewCellIdentifier, for: indexPath) as! EmptyEventTableViewCell
         return emptyCell
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//    
-//        return 100
-//    }
-
     
 }
-
-
-var fakeEventData = ["one", "tow", "three", "four"]

@@ -25,4 +25,9 @@ class Composer {
         tvc.controller = EventController()
         return tvc
     }
+    
+    class func settingsViewController() -> SettingsViewController {
+        let vc = SettingsViewController()
+        return vc
+    }
 }

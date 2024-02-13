@@ -17,6 +17,7 @@ class EventTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCellConstriant()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +36,11 @@ class EventTableViewCell: UITableViewCell {
         eventTitleLabel.anchor(top: topAnchor,
                                leading: leadingAnchor,
                                bottom: nil,
-                               trailing: nil)
+                               trailing: trailingAnchor,
+                               padding: UIEdgeInsets(top: 16,
+                                                     left: 16,
+                                                     bottom: 0,
+                                                     right: 16))
 //        NSLayoutConstraint.activate([
 //            eventTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
 //            eventTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10)
