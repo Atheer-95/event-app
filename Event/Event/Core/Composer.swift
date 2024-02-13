@@ -8,6 +8,12 @@
 import Foundation
 
 class Composer {
+    
+    class func tabBarController() -> TabBar {
+        let tabBar = TabBar()
+        return tabBar
+    }
+    
     class func eventViewController(controller: EventController = EventController()) -> EventViewController{
         let vc = EventViewController()
         vc.controller = controller

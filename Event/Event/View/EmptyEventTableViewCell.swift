@@ -9,25 +9,31 @@ import UIKit
 
 class EmptyEventTableViewCell: UITableViewCell {
     
-    lazy var emptyEventLabel: UILabel = {
+    var emptyEventLabel: UILabel = {
         let l = UILabel()
-        l.text = "No Events For Now ): , try again later"
+        l.text = "No Events For Now ): \n try again later."
+        l.numberOfLines = 0
+        l.textColor = .systemGray2
+        l.textAlignment = .center
         return l
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCellConstriant()
+        selectionStyle = .none
     }
     
     func setupCellConstriant(){
         addSubview(emptyEventLabel)
-        NSLayoutConstraint.activate([
-            emptyEventLabel.topAnchor.constraint(equalTo: topAnchor),
-            emptyEventLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            emptyEventLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            emptyEventLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        emptyEventLabel.anchor(top: topAnchor,
+                               leading: leadingAnchor,
+                               bottom: bottomAnchor,
+                               trailing: trailingAnchor,
+                               padding: UIEdgeInsets(top: 100,
+                                                     left: 0,
+                                                     bottom: 50,
+                                                     right: 0))
     }
     
     required init?(coder: NSCoder) {

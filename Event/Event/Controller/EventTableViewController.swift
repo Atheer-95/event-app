@@ -14,6 +14,8 @@ class EventTableViewController: UIViewController {
     var tableView: UITableView!
     var controller: EventController?
     
+    let eventCellId = "EventTableViewCell"
+    
     convenience init(tableViewStyle: UITableView.Style = .grouped) {
         self.init()
         tableView = UITableView(frame: .zero, style: tableViewStyle)
@@ -51,9 +53,9 @@ extension EventTableViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell  = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
+        let cell  = tableView.dequeueReusableCell(withIdentifier: eventCellId, for: indexPath) as! EventTableViewCell
         
-        if let event = events?[indexPath.row] {
+        if let event = events?[indexPath.row]{
             cell.setupCellData(event: event)
             return cell
         }
@@ -62,3 +64,6 @@ extension EventTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     
 }
+
+
+var fakeEvents = ["one", "tow", "three", "four"]

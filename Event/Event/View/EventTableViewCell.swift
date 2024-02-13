@@ -23,16 +23,23 @@ class EventTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCellData(event: Event){
-        eventTitleLabel.text = event.title
+    func setupCellData(event: Event?){
+        eventTitleLabel.text = event?.title
     }
 
+    func cellTest(data: String){
+        eventTitleLabel.text = data
+    }
     private func setupCellConstriant(){
         addSubview(eventTitleLabel)
-        NSLayoutConstraint.activate([
-            eventTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            eventTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10)
-        ])
+        eventTitleLabel.anchor(top: topAnchor,
+                               leading: leadingAnchor,
+                               bottom: nil,
+                               trailing: nil)
+//        NSLayoutConstraint.activate([
+//            eventTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+//            eventTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10)
+//        ])
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
