@@ -8,13 +8,32 @@
 import UIKit
 
 class EventTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
+    
+    lazy var eventTitleLabel: UILabel = {
+        let l  = UILabel()
+        return l
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupCellConstriant()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupCellData(event: Event){
+        eventTitleLabel.text = event.title
     }
 
+    private func setupCellConstriant(){
+        addSubview(eventTitleLabel)
+        NSLayoutConstraint.activate([
+            eventTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            eventTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10)
+        ])
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

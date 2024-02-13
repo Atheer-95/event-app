@@ -6,5 +6,6 @@ target 'Event' do
   use_frameworks!
 
   # Pods for Event
+ pod 'LBTATools'
 
 end

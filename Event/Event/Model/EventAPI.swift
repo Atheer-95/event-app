@@ -39,7 +39,7 @@ class EventAPI {
         var request = URLRequest(url: Endpoint.events.url)
         request.httpMethod = "GET"
         let clientID = "Mzk2NjA5MjJ8MTcwNjUyMDA2Mi44MjQ4MDAz"
-        let clientSecret = "" // optionally
+//        let clientSecret = "" // optionally
         let queryItems = [URLQueryItem(name: "client_id", value: clientID)]
         var components = URLComponents(url: Endpoint.events.url, resolvingAgainstBaseURL: true)!
         components.queryItems = queryItems
@@ -57,19 +57,16 @@ class EventAPI {
             }
 
             if let data = data {
-                print(data)
                 do {
-//                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-//                    {print(json)}
+//
                     // Use JSONDecoder to parse the data
                     let decoder = JSONDecoder()
                     // Assuming you have an EventResponse array in your JSON
                     let seatGeekResponseObject = try decoder.decode(SeatGeekResponse.self, from: data)
                     // Handle the parsed data
-//                    print(seatGeekResponseObject.events)
-                    for event in seatGeekResponseObject.events {
-                        print(event.title)
-                    }
+                    completion(seatGeekResponseObject, nil)
+                    
+
                                  
                 } catch {
                     print("Error parsing JSON data: \(error)")
